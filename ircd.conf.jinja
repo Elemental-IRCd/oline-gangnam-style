@@ -151,7 +151,7 @@ privset "admin" {
 
 {% for oline in network.olines %}
 operator "{{ oline.name }}" {
-	password = "{{ oline.pass }}";
+	password = "{{ oline.password }}";
 	user = "*@*";
 	snomask = "{{ oline.snomask }}";
 	flags = need_ssl, encrypted;
