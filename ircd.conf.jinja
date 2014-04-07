@@ -165,7 +165,14 @@ connect "{{ link.theirname }}" {
 	send_password = "{{ link.send_password }}";
 	accept_password = "{{ link.accept_password }}";
 	port = {{ link.port }};
-	flags = compressed, topicburst, ssl;
+	{% if link.hub_mask %}
+	hub_mask = "{{ link.hub_mask }}";
+	{% endif %}
+	{% if link.raw %}
+	flags = compressed, topicburst, autoconn;
+	{% else %}
+	flags = compressed, topicburst, ssl, autoconn;
+	{% endif %}
 };
 {% endfor %}
 
@@ -308,7 +315,7 @@ alias "GS" {
 alias "{{ alias.name }}" {
 	target = "{{ alias.target }}";
 };
-{% endif %}
+{% endfor %}
 
 general {
 	hide_error_messages = opers;
