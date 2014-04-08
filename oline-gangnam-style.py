@@ -6,6 +6,7 @@ import sys
 
 env = Environment(loader=FileSystemLoader("."))
 template = env.get_template('ircd.conf.jinja')
+motd = env.get_template('ircd.motd.jinja')
 
 config = {}
 
@@ -17,4 +18,7 @@ network = config["network"]
 for server in config["servers"]:
     with open("confs/" + server["name"]+".conf", "w") as fout:
         fout.write(template.render(**locals()))
+
+    with open("confs/" + server["name"]+".motd", "w") as fout:
+        fout.write(motd.render(**locals()))
 

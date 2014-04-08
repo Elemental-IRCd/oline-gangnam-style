@@ -55,4 +55,4 @@ docs/_build/
 # Config files
 config.json
 *.conf
-
+*.motd
