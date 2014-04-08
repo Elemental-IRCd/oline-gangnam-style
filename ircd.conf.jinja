@@ -155,8 +155,18 @@ operator "{{ oline.name }}" {
 	user = "*@*";
 	snomask = "{{ oline.snomask }}";
 	flags = need_ssl, encrypted;
+	privset = "{{ oline.privset }}";
 };
+{% endfor %}
 
+{% for oline in server.olines %}
+operator "{{ oline.name }}" {
+	password = "{{ oline.password }}";
+	user = "*@*";
+	snomask = "{{ oline.snomask }}";
+	flags = need_ssl, encrypted;
+	privset = "{{ oline.privset }}";
+};
 {% endfor %}
 
 {% for link in server.links %}

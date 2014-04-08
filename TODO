@@ -1,0 +1,5 @@
+Make server linking less magic
+ - Automatic generation of link passwords
+ - Define a tree
+ - generate links to trace the tree
+

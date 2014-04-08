@@ -14,7 +14,7 @@
 			{"user": "*@*", "class": "users"}
 		],
 		"olines": [
-			{"name": "Xena", "password": "lolpassword", "snomask": "+bcdfFknrsSuWxyz"}
+			{"name": "Xena", "password": "lolpassword", "snomask": "+bcdfFknrsSuWxyz", "privset": "admin"}
 		],
 		"services": [
 			"services.int",
@@ -39,6 +39,7 @@
 			"sid": "649",
 			"description": "Enhanced by Team Plasma",
 			"ilines": [],
+			"olines": [],
 			"hub": true,
 			"links": [
 				{
