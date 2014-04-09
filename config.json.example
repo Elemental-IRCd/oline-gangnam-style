@@ -2,19 +2,25 @@
 	"network": {
 		"name": "ShadowNET",
 		"description": "IRC Network of right now",
-		"helpurl": "#help",
+		"helpchan": "#help",
 		"helpurl": "None at the moment",
 		"staffemail": "staff@yolo-swag.com",
 		"ports": "6660 .. 6667, 30502",
 		"sslports": "6697, 42069",
 		"ilines": [
-			{"user": "*@109.169.31.3", "password": "swagyolo420", "spoof": "webirc.", "class": "users"},
-			{"user": "*@109.169.31.4", "password": "swagyolo420", "spoof": "webirc.", "class": "users"},
-			{"user": "*@78.129.190.63", "password": "swagyolo420", "spoof": "webirc.", "class": "users"},
-			{"user": "*@*", "class": "users"}
+			{
+				"user": "*@*",
+				"class": "users",
+				"flags": "no_tilde"
+			}
 		],
 		"olines": [
-			{"name": "Xena", "password": "lolpassword", "snomask": "+bcdfFknrsSuWxyz", "privset": "admin"}
+			{
+				"name": "Xena",
+				"password": "LolNotPassword",
+				"snomask": "+bcdfFknrsSuWxyz",
+				"privset": "admin"
+			}
 		],
 		"services": [
 			"services.int",
@@ -30,7 +36,7 @@
 			{"name": "SN", "target": "ShadowNET"},
 			{"name": "ShadowNET", "target": "ShadowNET"}
 		],
-		"defumodes": "nt"
+		"defumodes": "ix"
 	},
 
 	"servers": [
@@ -40,18 +46,46 @@
 			"description": "Enhanced by Team Plasma",
 			"ilines": [],
 			"olines": [],
+			"host": "127.0.5.1",
+			"mypass": "kjlasjdfkljwelkj",
 			"hub": true,
-			"links": [
-				{
-					"theirname": "services.int",
-					"host": "127.0.0.1",
-					"raw": true,
-					"send_password": "1mZ58E6HHbvdIos",
-					"accept_password": "14nN8XHch0cG23z",
-					"port": 6666,
-					"hub_mask": "*"
-				}
+			"linksumm": [
+				"cyka.yolo-swag.com",
+				"services.int",
+				"ardreth.shadownet.int"
 			]
+		},
+		{
+			"name": "cyka.yolo-swag.com",
+			"sid": "6YK",
+			"description": "cyka blyat xaxaxa",
+			"ilines": [],
+			"olines": [],
+			"host": "127.5.6.2",
+			"mypass": "asldjf;ljawklj",
+			"hub": false,
+			"linksumm": [ "genesect.yolo-swag.com" ],
+			"type": "elemental-ircd"
+		},
+		{
+			"name": "services.int",
+			"sid": "00A",
+			"description": "Atheme Services",
+			"mypass": "a",
+			"host": "127.0.0.1",
+			"linksumm": [],
+			"hub": true,
+			"type": "atheme"
+		},
+		{
+			"name": "ardreth.shadownet.int",
+			"sid": "376",
+			"description": "Cod Services",
+			"mypass": "dev",
+			"host": "127.0.0.1",
+			"linksumm": [],
+			"hub": true,
+			"type": "cod"
 		}
 	]
 }

@@ -1,24 +1,51 @@
 from jinja2 import Environment, FileSystemLoader
 
 import json
-import os
 import sys
 
-env = Environment(loader=FileSystemLoader("."))
-template = env.get_template('ircd.conf.jinja')
-motd = env.get_template('ircd.motd.jinja')
 
-config = {}
+def gen_CN_line(source, link, config, raw=False):
+    link = str(link)
 
-with open(sys.argv[1] if len(sys.argv) > 1 else "config.json", "r") as fin:
-    config = json.loads(fin.read())
+    server = {}
 
-network = config["network"]
+    for net_server in config["servers"]:
+        if net_server["name"] == link:
+            server = net_server
+            break
 
-for server in config["servers"]:
-    with open("confs/" + server["name"]+".conf", "w") as fout:
-        fout.write(template.render(**locals()))
+    ret = dict(
+        theirname=link,
+        host=server["host"],
+        send_password=server["mypass"],
+        accept_password=source["mypass"],
+        port=6697,
+        raw=raw
+    )
 
-    with open("confs/" + server["name"]+".motd", "w") as fout:
-        fout.write(motd.render(**locals()))
+    return ret
 
+if __name__ == "__main__":
+    env = Environment(loader=FileSystemLoader("."))
+    template = env.get_template('ircd.conf.jinja')
+    motd = env.get_template('ircd.motd.jinja')
+
+    config = {}
+
+    with open(sys.argv[1] if len(sys.argv) > 1 else "config.json", "r") as fin:
+        config = json.loads(fin.read())
+
+    network = config["network"]
+
+    for server in config["servers"]:
+        server["links"] = []
+
+        for link in server["linksumm"]:
+            server["links"].append(gen_CN_line(server, link, config,
+                                               link.endswith("int")))
+
+        with open("confs/" + server["name"]+".conf", "w") as fout:
+            fout.write(template.render(**locals()))
+
+        with open("confs/" + server["name"]+".motd", "w") as fout:
+            fout.write(motd.render(**locals()))

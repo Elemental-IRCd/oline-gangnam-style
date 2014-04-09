@@ -1,5 +1,6 @@
 Make server linking less magic
  - Automatic generation of link passwords
- - Define a tree
- - generate links to trace the tree
+
+Templates for Atheme and Cod configuration
+ - Network settings for them
 
