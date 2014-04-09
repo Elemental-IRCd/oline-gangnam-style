@@ -28,13 +28,13 @@ serverinfo {
 	network_description = "{{ network.description }}";
 	helpchan = "{{ network.helpchan }}";
 	helpurl = "{{ network.helpurl }}";
-	{% if server.hub %}
+{% if server.hub %}
 	hub = yes;
-	{% else %}
+{% else %}
 	hub = no;
-	{% endif %}
+{% endif %}
 
-# SSL things. These have no reason to not be hard-coded
+	# SSL things. These have no reason to not be hard-coded
 	ssl_cert = "etc/ssl.cert";
 	ssl_private_key = "etc/ssl.key";
 	ssl_dh_params = "etc/dh.pem";
@@ -94,18 +94,18 @@ class "server" {
 auth {
 	user = "{{ iline.user }}";
 	class = "{{ iline.class }}";
-	{% if iline.spoof %}
+{% if iline.spoof %}
 	spoof = "{{ iline.spoof }}";
-	{% endif %}
-	{% if iline.password %}
+{% endif %}
+{% if iline.password %}
 	password = "{{ iline.password }}";
-	{% endif %}
-	{% if iline.auth_user %}
+{% endif %}
+{% if iline.auth_user %}
 	auth_user = "{{ iline.auth_user }}";
-	{% endif %}
-	{% if iline.flags %}
+{% endif %}
+{% if iline.flags %}
 	flags = {{ iline.flags }};
-	{% endif %}
+{% endif %}
 };
 {% endfor %}
 
@@ -113,21 +113,20 @@ auth {
 auth {
 	user = "{{ iline.user }}";
 	class = "{{ iline.class }}";
-	{% if iline.spoof %}
+{% if iline.spoof %}
 	spoof = "{{ iline.spoof }}";
-	{% endif %}
-	{% if iline.password %}
+{% endif %}
+{% if iline.password %}
 	password = "{{ iline.password }}";
-	{% endif %}
-	{% if iline.auth_user %}
+{% endif %}
+{% if iline.auth_user %}
 	auth_user = "{{ iline.auth_user }}";
-	{% endif %}
-	{% if iline.flags %}
+{% endif %}
+{% if iline.flags %}
 	flags = {{ iline.flags }};
-	{% endif %}
+{% endif %}
 };
 {% endfor %}
-
 
 privset "local_op" {
 	privs = oper:local_kill, oper:operwall;
@@ -175,21 +174,21 @@ connect "{{ link.theirname }}" {
 	send_password = "{{ link.send_password }}";
 	accept_password = "{{ link.accept_password }}";
 	port = {{ link.port }};
-	{% if link.hub_mask %}
+{% if link.hub_mask %}
 	hub_mask = "{{ link.hub_mask }}";
-	{% endif %}
-	{% if link.raw %}
+{% endif %}
+{% if link.raw %}
 	flags = compressed, topicburst, autoconn;
-	{% else %}
+{% else %}
 	flags = compressed, topicburst, ssl, autoconn;
-	{% endif %}
+{% endif %}
 };
 {% endfor %}
 
 service {
-	{% for service in network.services %}
+{% for service in network.ulines %}
 	name = "{{ service }}";
-	{% endfor %}
+{% endfor %}
 };
 
 cluster {
@@ -203,25 +202,25 @@ shared {
 };
 
 channel {
-	{% if network.disabledmodes %}
+{% if network.disabledmodes %}
 	disabledmodes = "{{ network.disabledmodes }}";
-	{% endif %}
+{% endif %}
 	autochanmodes = "nt";
-	{% if network.owner %}
+{% if network.owner %}
 	use_owner = yes;
-	{% else %}
+{% else %}
 	use_owner = no;
-	{% endif %}
-	{% if network.admin %}
+{% endif %}
+{% if network.admin %}
 	use_admin = yes;
-	{% else %}
+{% else %}
 	use_admin = no;
-	{% endif %}
-	{% if network.halfop %}
+{% endif %}
+{% if network.halfop %}
 	use_halfop = yes;
-	{% else %}
+{% else %}
 	use_halfop = no;
-	{% endif %}
+{% endif %}
 	use_knock = yes;
 	use_local_channels = no;
 	knock_delay = 5 minutes;
@@ -320,13 +319,11 @@ alias "IS" {
 alias "GS" {
 	target = "GroupServ";
 };
-
 {% for alias in network.customalias %}
 alias "{{ alias.name }}" {
 	target = "{{ alias.target }}";
 };
 {% endfor %}
-
 general {
 	hide_error_messages = opers;
 	hide_spoof_ips = yes;

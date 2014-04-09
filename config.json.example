@@ -53,7 +53,8 @@
 				"cyka.yolo-swag.com",
 				"services.int",
 				"ardreth.shadownet.int"
-			]
+			],
+			"type": "elemental-ircd"
 		},
 		{
 			"name": "cyka.yolo-swag.com",

@@ -37,15 +37,16 @@ if __name__ == "__main__":
     network = config["network"]
 
     for server in config["servers"]:
-        template = env.get_template("templates/%s.jinja" % server["type"])
-        server["links"] = []
+        if server["type"] != "noconf":
+            template = env.get_template("templates/%s.jinja" % server["type"])
+            server["links"] = []
 
-        for link in server["linksumm"]:
-            server["links"].append(gen_CN_line(server, link, config,
-                                               link.endswith("int")))
+            for link in server["linksumm"]:
+                server["links"].append(gen_CN_line(server, link, config,
+                                                   link.endswith("int")))
 
-        with open("confs/" + server["name"]+".conf", "w") as fout:
-            fout.write(template.render(**locals()))
+            with open("confs/" + server["name"]+".conf", "w") as fout:
+                fout.write(template.render(**locals()))
 
-        with open("confs/" + server["name"]+".motd", "w") as fout:
-            fout.write(motd.render(**locals()))
+            with open("confs/" + server["name"]+".motd", "w") as fout:
+                fout.write(motd.render(**locals()))
