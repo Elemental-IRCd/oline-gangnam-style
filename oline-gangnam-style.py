@@ -27,8 +27,7 @@ def gen_CN_line(source, link, config, raw=False):
 
 if __name__ == "__main__":
     env = Environment(loader=FileSystemLoader("."))
-    template = env.get_template('ircd.conf.jinja')
-    motd = env.get_template('ircd.motd.jinja')
+    motd = env.get_template('templates/ircd.motd.jinja')
 
     config = {}
 
@@ -38,6 +37,7 @@ if __name__ == "__main__":
     network = config["network"]
 
     for server in config["servers"]:
+        template = env.get_template("templates/%s.jinja" % server["type"])
         server["links"] = []
 
         for link in server["linksumm"]:
