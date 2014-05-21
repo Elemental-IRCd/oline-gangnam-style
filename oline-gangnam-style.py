@@ -20,6 +20,7 @@ def gen_CN_line(source, link, config, raw=False):
         send_password=server["mypass"],
         accept_password=source["mypass"],
         port=6697,
+        hub_mask="*",
         raw=raw
     )
 
